@@ -2,6 +2,8 @@ require 'csv'
 
 module Mycsv
   
+  extend self
+  
   def loadfile(filename)
 
     arr = Array.new()
@@ -12,9 +14,13 @@ module Mycsv
     arrout = Array.new()
     arr.each do |line|
       line2 = line.encode('UTF-8')
+#     puts line2
 #     CSV.parse(line2, {:col_sep => ';'}) do |row|
-      arrout.push(CSV.parse(line2, {:col_sep => ';'}))
+      foo = CSV.parse(line2, {:col_sep => ';'})
+      arrout.push(foo[0]) # parse returns an array containing one array
     end
+#   puts arrout.inspect
+#   exit
     return arrout
   end # loadfile
   

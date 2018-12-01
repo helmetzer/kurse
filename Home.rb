@@ -8,7 +8,6 @@ class String
     f = self
     f.gsub!('.', '')
     f.tr!(',', '.')
-    puts f
     f.to_f
   end
 end
