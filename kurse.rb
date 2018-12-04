@@ -13,8 +13,6 @@ class Kurse
     arr = Mycsv::loadfile(filename)
     arr.each do |row|
 #   puts row.inspect
-#   puts "fuck"
-#   exit
       isin = row[1]
       isin.kind_of? String and isin.length == 12 or next # not an ISIN
       curr = row[13]
@@ -28,10 +26,18 @@ class Kurse
     end
 #   puts @table.inspect
   end
+
+  def namevon(isin)
+    @table[isin][1]
+  end
+  
+  def kursvon(isin)
+    @table[isin][0]
+  end
   
 end
+__END__
 
 kurse = Kurse.new()
 kurse.loadfile()
 puts kurse.inspect
-__END__
