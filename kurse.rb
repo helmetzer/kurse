@@ -8,7 +8,7 @@ class Kurse
   end
 
   def loadfile(filename = nil)
-    filename ||= Home::DOCS + "Alles.csv"
+    filename ||= Home::BUCKS + "Alles.csv"
 
     arr = Mycsv::loadfile(filename)
     arr.each do |row|

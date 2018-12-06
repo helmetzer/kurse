@@ -1,6 +1,7 @@
 module Home
   HOME = '/daten/Users/Horst/'
   DOCS = HOME + 'Dokumente/'
+  BUCKS = DOCS + 'Bucks/'
 end
 
 class String
