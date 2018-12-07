@@ -12,3 +12,10 @@ class String
     f.to_f
   end
 end
+
+class Float
+  def to_german
+    f = self.to_s
+    f.tr!('.', ',')
+  end
+end

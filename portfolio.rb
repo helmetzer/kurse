@@ -53,7 +53,6 @@ class Portfolio
   end
 
   def loadfile(filename = nil)
-    filename ||= Home::BUCKS + "Depot.csv"
 
     arr = Mycsv::loadfile(filename)
 #   puts(filename)
@@ -78,24 +77,4 @@ class Portfolio
   end
   
 end
-
-kurse = Kurse.new()
-kurse.loadfile()
-
-portfolio = Portfolio.new()
-portfolio.loadfile(Home::BUCKS + "test.csv")
-# puts portfolio.inspect
-
-pb = PortfolioBewertet.new(portfolio, kurse)
-print pb.show
-
-klasse = Klassen.new
-klasse.loadfile
-
-sum = KlassenSummary.new(pb, klasse)
-print sum.show
 __END__
-      if curr != 'EUR'
-        warn "unknown currency for ISIN #{isin} : #{curr}"
-        next
-      end

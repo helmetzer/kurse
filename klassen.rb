@@ -52,6 +52,15 @@ class KlassenSummary
     l << "\n"
   end
 
+  def line_csv(desc, *a)
+
+#   puts a.inspect
+
+    a.collect! { |f| f ? f.to_german : '' }
+    l = [desc, a].join(';')
+    l << "\n"
+  end
+
   def show(is_formatted = 1)
 
     # TODO:
@@ -59,13 +68,13 @@ class KlassenSummary
     # use method = formatted ? :form : :csv
     # send(method, args ...)
     #
-    line = :line_form
+    line = is_formatted ? :line_form : :line_csv
 
     s = @name + "\n\n"
     @desc_long.each_index do |i|
       s << send(line, @desc_long[i], @sum[i], @anteile[i], @anteile2[i])
     end
-    s << send(line, "Gesamt", @total, 1, @total2)
+    s << send(line, "Gesamt", @total, 1.0, @total2)
   end
 end
 
