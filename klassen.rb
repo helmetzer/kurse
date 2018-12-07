@@ -8,6 +8,7 @@ class KlassenSummary
 
 #   @klassen = klassen
     @desc_long = klassen.desc_long
+    flags = klassen.flags
     l = @desc_long.size
     @sum = Array.new(l, 0.0)
     @name = pb.name
@@ -28,17 +29,43 @@ class KlassenSummary
         @sum[-1] += wert # zu Sonstiges addieren
       end
     end
-    @anteile = @sum.collect {|s| s/@total}
+    @anteile = Array.new
+    @total2 = 0.0
+    @sum.each_index do |i|
+      @anteile[i] = @sum[i]/@total
+      @total2 += @anteile[i] if flags[i]
+    end
+    @anteile2 = Array.new
+    flags.each_index do |i|
+      @anteile2[i] = flags[i] && @anteile[i]/@total2
+    end
   end
   
-  def show
+  FORM1 = "%-35.35s %10.2f"
+  FORM2 = " %6.2f %%"
 
-    form = "%-35.35s %10.2f  %10.2f %%\n"
+  def line_form(desc, a1, a2, a3)
+
+    l = sprintf(FORM1, desc, a1)
+    l << sprintf(FORM2, 100.0*a2)
+    l << sprintf(FORM2, 100.0*a3) if a3
+    l << "\n"
+  end
+
+  def show(is_formatted = 1)
+
+    # TODO:
+    # switch between formatted and csv output
+    # use method = formatted ? :form : :csv
+    # send(method, args ...)
+    #
+    line = :line_form
+
     s = @name + "\n\n"
     @desc_long.each_index do |i|
-      s << sprintf(form, @desc_long[i], @sum[i], 100.0*@anteile[i])
+      s << send(line, @desc_long[i], @sum[i], @anteile[i], @anteile2[i])
     end
-    s << sprintf(form, "Gesamt", @total, 100.0)
+    s << send(line, "Gesamt", @total, 1, @total2)
   end
 end
 
@@ -46,7 +73,7 @@ class Klassen
   
   KOPF = 4
 
-  attr_reader :table, :desc_long
+  attr_reader :table, :desc_long, :flags
 
   def initialize()
     @table = Hash.new()
