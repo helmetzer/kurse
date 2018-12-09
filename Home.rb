@@ -15,7 +15,7 @@ end
 
 class Float
   def to_german
-    f = self.round(2).to_s
+    f = self.round(4).to_s
     f.tr!('.', ',')
   end
 end
