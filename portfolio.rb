@@ -17,6 +17,10 @@ class PortfolioBewertet
 #   puts tab.inspect
     tab.each_key do |isin|
       k = kurse.kursvon(isin)
+      unless k
+        warn "unknown price for ISIN #{isin}}"
+        k = 0.0
+      end
       n = kurse.namevon(isin)
       stuecke = tab[isin]
       kt = k*stuecke
@@ -59,6 +63,12 @@ class Portfolio
     arr.each do |row|
 #     puts row.inspect
       isin = row[0]
+      if isin.kind_of? String and isin.length == 12
+        curr = row[2].german_to_f
+        @table[isin] += curr
+        next
+      end
+# not an ISIN
       if isin == "Depotnummer"
         @name ||= "Depotnummer: #{row[1]}"
         next
@@ -69,9 +79,6 @@ class Portfolio
         self.loadfile(newfile)
         next
       end
-      isin.kind_of? String and isin.length == 12 or next # not an ISIN
-      curr = row[2].german_to_f
-      @table[isin] += curr
     end
 #   puts @table.inspect
   end

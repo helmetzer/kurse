@@ -12,7 +12,7 @@ class Kurse
 
     arr = Mycsv::loadfile(filename)
     arr.each do |row|
-#   puts row.inspect
+#     puts row.inspect
       isin = row[1]
       isin.kind_of? String and isin.length == 12 or next # not an ISIN
       curr = row[13]
@@ -20,19 +20,21 @@ class Kurse
         warn "unknown currency for ISIN #{isin} : #{curr}"
         next
       end
-      total = row[12].german_to_f
-      num = row[3].german_to_f
-      @table[isin] = [total/num, row[2]]
+      total = row[12] or next
+      total != '' or next
+      total = total.german_to_f / row[3].german_to_f
+      @table[isin] = [total, row[2]]
     end
 #   puts @table.inspect
   end
 
   def namevon(isin)
+    @table[isin] or return ''
     @table[isin][1]
   end
   
   def kursvon(isin)
-    @table[isin][0]
+    @table[isin] && @table[isin][0]
   end
   
 end

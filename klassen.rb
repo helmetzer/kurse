@@ -112,13 +112,3 @@ class Klassen
   
 end
 __END__
-      if isin == "Depotnummer"
-        @name ||= "Depotnummer: #{row[1]}"
-        next
-      end
-      if isin == "File"
-        newfile = row[1]
-        newfile = Home::BUCKS + newfile if newfile[0] != '/'
-        self.loadfile(newfile)
-        next
-      end
