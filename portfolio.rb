@@ -18,7 +18,7 @@ class PortfolioBewertet
     tab.each_key do |isin|
       k = kurse.kursvon(isin)
       unless k
-        warn "unknown price for ISIN #{isin}}"
+        warn "unknown price for ISIN #{isin}"
         k = 0.0
       end
       n = kurse.namevon(isin)
