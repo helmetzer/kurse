@@ -80,7 +80,7 @@ end
 
 class Klassen
   
-  KOPF = 4
+  KOPF = 6
 
   attr_reader :table, :desc_long, :flags
 
@@ -97,6 +97,7 @@ class Klassen
     @desc.slice!(0, KOPF)
     @desc_long = arr.shift
     @desc_long.slice!(0, KOPF)
+#   puts @desc_long.inspect
     @flags = arr.shift
     @flags.slice!(0, KOPF)
     arr.each do |row|

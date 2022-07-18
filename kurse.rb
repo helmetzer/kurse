@@ -4,7 +4,9 @@ require_relative 'mycsv'
 class Kurse
   
   def initialize()
-    @table = { "XX000CASH000" => [1000.0, "Cash"]}
+    @table = { "XX000CASH000" => [1000.0, "Cash"],
+               "LU0011850392" => [10.0, "BGF Em. Europe - kein Handel"],
+    }
   end
 
   def loadfile(filename = nil)

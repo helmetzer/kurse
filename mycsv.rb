@@ -8,6 +8,7 @@ module Mycsv
 
     arr = Array.new()
     File.open(filename, encoding: 'iso-8859-1') do |file|
+#   File.open(filename) do |file|
       arr = file.readlines
     end
 
