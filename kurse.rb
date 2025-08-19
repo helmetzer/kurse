@@ -5,7 +5,8 @@ class Kurse
   
   def initialize()
     @table = { "XX000CASH000" => [1000.0, "Cash"],
-               "LU0011850392" => [10.0, "BGF Em. Europe - kein Handel"],
+               "LU0011850392" => [1.0, "BGF Em. Europe - kein Handel"],
+#              "LU2719174067" => [76.79, "BGF Em. Europe 2 - neu"],
     }
   end
 
