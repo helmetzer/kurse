@@ -1,5 +1,5 @@
 module Home
-  HOME = '/daten/Users/Horst/'
+  HOME = '/daten/Users/horst/'
   DOCS = HOME + 'Dokumente/'
   BUCKS = DOCS + 'Bucks/'
 end

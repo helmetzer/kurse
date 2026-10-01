@@ -10,8 +10,7 @@ class Kurse
     }
   end
 
-  def loadfile(filename = nil)
-    filename ||= Home::BUCKS + "Alles.csv"
+  def loadfile(filename)
 
     arr = Mycsv::loadfile(filename)
     arr.each do |row|
